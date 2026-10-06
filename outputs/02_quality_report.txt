@@ -1,0 +1,134 @@
+DATA QUALITY ASSESSMENT REPORT
+=================================
+
+Total Rows    : 32561
+Total Columns : 15
+Duplicate Rows: 24
+
+Column-Level Quality Summary:
+           Column  DataType MissingCount MissingPct UniqueValues   Min     Max
+1             age   integer            0       0.00           73    17      90
+2       workclass character         1836       5.64            9    NA      NA
+3          fnlwgt   integer            0       0.00        21648 12285 1484705
+4       education character            0       0.00           16    NA      NA
+5   education_num   integer            0       0.00           16     1      16
+6  marital_status character            0       0.00            7    NA      NA
+7      occupation character         1843       5.66           15    NA      NA
+8    relationship character            0       0.00            6    NA      NA
+9            race character            0       0.00            5    NA      NA
+10            sex character            0       0.00            2    NA      NA
+11   capital_gain   integer            0       0.00          119     0   99999
+12   capital_loss   integer            0       0.00           92     0    4356
+13 hours_per_week   integer            0       0.00           94     1      99
+14 native_country character          583       1.79           42    NA      NA
+15         income character            0       0.00            2    NA      NA
+
+
+Categorical Unique Values:
+
+workclass:
+
+     Federal-gov        Local-gov     Never-worked          Private 
+             960             2093                7            22696 
+    Self-emp-inc Self-emp-not-inc        State-gov      Without-pay 
+            1116             2541             1298               14 
+            <NA> 
+            1836 
+
+education:
+
+        10th         11th         12th      1st-4th      5th-6th      7th-8th 
+         933         1175          433          168          333          646 
+         9th   Assoc-acdm    Assoc-voc    Bachelors    Doctorate      HS-grad 
+         514         1067         1382         5355          413        10501 
+     Masters    Preschool  Prof-school Some-college 
+        1723           51          576         7291 
+
+marital_status:
+
+             Divorced     Married-AF-spouse    Married-civ-spouse 
+                 4443                    23                 14976 
+Married-spouse-absent         Never-married             Separated 
+                  418                 10683                  1025 
+              Widowed 
+                  993 
+
+occupation:
+
+     Adm-clerical      Armed-Forces      Craft-repair   Exec-managerial 
+             3770                 9              4099              4066 
+  Farming-fishing Handlers-cleaners Machine-op-inspct     Other-service 
+              994              1370              2002              3295 
+  Priv-house-serv    Prof-specialty   Protective-serv             Sales 
+              149              4140               649              3650 
+     Tech-support  Transport-moving              <NA> 
+              928              1597              1843 
+
+relationship:
+
+       Husband  Not-in-family Other-relative      Own-child      Unmarried 
+         13193           8305            981           5068           3446 
+          Wife 
+          1568 
+
+race:
+
+Amer-Indian-Eskimo Asian-Pac-Islander              Black              Other 
+               311               1039               3124                271 
+             White 
+             27816 
+
+sex:
+
+Female   Male 
+ 10771  21790 
+
+native_country:
+
+                  Cambodia                     Canada 
+                        19                        121 
+                     China                   Columbia 
+                        75                         59 
+                      Cuba         Dominican-Republic 
+                        95                         70 
+                   Ecuador                El-Salvador 
+                        28                        106 
+                   England                     France 
+                        90                         29 
+                   Germany                     Greece 
+                       137                         29 
+                 Guatemala                      Haiti 
+                        64                         44 
+        Holand-Netherlands                   Honduras 
+                         1                         13 
+                      Hong                    Hungary 
+                        20                         13 
+                     India                       Iran 
+                       100                         43 
+                   Ireland                      Italy 
+                        24                         73 
+                   Jamaica                      Japan 
+                        81                         62 
+                      Laos                     Mexico 
+                        18                        643 
+                 Nicaragua Outlying-US(Guam-USVI-etc) 
+                        34                         14 
+                      Peru                Philippines 
+                        31                        198 
+                    Poland                   Portugal 
+                        60                         37 
+               Puerto-Rico                   Scotland 
+                       114                         12 
+                     South                     Taiwan 
+                        80                         51 
+                  Thailand            Trinadad&Tobago 
+                        18                         19 
+             United-States                    Vietnam 
+                     29170                         67 
+                Yugoslavia                       <NA> 
+                        16                        583 
+
+income:
+
+<=50K  >50K 
+24720  7841 

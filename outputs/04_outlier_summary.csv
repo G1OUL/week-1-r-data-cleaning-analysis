@@ -1,0 +1,7 @@
+"Variable","Q1","Q3","IQR","Lower_Bound","Upper_Bound","N_Outliers","Pct_Outliers"
+"age",28,48,20,-2,78,142,0.44
+"fnlwgt",117827,236993,119166,-60922,415742,993,3.05
+"education_num",9,12,3,4.5,16.5,1193,3.67
+"capital_gain",0,0,0,0,0,2712,8.34
+"capital_loss",0,0,0,0,0,1519,4.67
+"hours_per_week",40,45,5,32.5,52.5,9002,27.67

@@ -1,0 +1,28 @@
+TRANSFORMATION REPORT
+=====================
+
+Method: Min-Max Normalization
+Normalized variables: age_norm, fnlwgt_norm, education_num_norm,
+  capital_gain_norm, capital_loss_norm, hours_per_week_norm
+
+BEFORE stats:
+                     Variable        Mean          SD   Min     Max
+age                       age     38.5855     13.6380    17      90
+fnlwgt                 fnlwgt 189780.8485 105556.4710 12285 1484705
+education_num   education_num     10.0818      2.5716     1      16
+capital_gain     capital_gain   1078.4437   7387.9574     0   99999
+capital_loss     capital_loss     87.3682    403.1018     0    4356
+hours_per_week hours_per_week     40.4403     12.3469     1      99
+
+AFTER stats:
+                               Variable   Mean     SD Min Max
+age_norm                       age_norm 0.2957 0.1868   0   1
+fnlwgt_norm                 fnlwgt_norm 0.1205 0.0717   0   1
+education_num_norm   education_num_norm 0.6055 0.1714   0   1
+capital_gain_norm     capital_gain_norm 0.0108 0.0739   0   1
+capital_loss_norm     capital_loss_norm 0.0201 0.0925   0   1
+hours_per_week_norm hours_per_week_norm 0.4025 0.1260   0   1
+
+Categorical Encoding: One-hot dummy encoding
+Variables encoded: workclass, marital_status, occupation, relationship, race, sex
+Dummy columns added: 36

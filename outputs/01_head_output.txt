@@ -1,0 +1,102 @@
+head(adult_raw):
+  age        workclass fnlwgt education education_num     marital_status
+1  39        State-gov  77516 Bachelors            13      Never-married
+2  50 Self-emp-not-inc  83311 Bachelors            13 Married-civ-spouse
+3  38          Private 215646   HS-grad             9           Divorced
+4  53          Private 234721      11th             7 Married-civ-spouse
+5  28          Private 338409 Bachelors            13 Married-civ-spouse
+6  37          Private 284582   Masters            14 Married-civ-spouse
+         occupation  relationship  race    sex capital_gain capital_loss
+1      Adm-clerical Not-in-family White   Male         2174            0
+2   Exec-managerial       Husband White   Male            0            0
+3 Handlers-cleaners Not-in-family White   Male            0            0
+4 Handlers-cleaners       Husband Black   Male            0            0
+5    Prof-specialty          Wife Black Female            0            0
+6   Exec-managerial          Wife White Female            0            0
+  hours_per_week native_country income
+1             40  United-States  <=50K
+2             13  United-States  <=50K
+3             40  United-States  <=50K
+4             40  United-States  <=50K
+5             40           Cuba  <=50K
+6             40  United-States  <=50K
+
+tail(adult_raw):
+      age    workclass fnlwgt    education education_num     marital_status
+32556  22      Private 310152 Some-college            10      Never-married
+32557  27      Private 257302   Assoc-acdm            12 Married-civ-spouse
+32558  40      Private 154374      HS-grad             9 Married-civ-spouse
+32559  58      Private 151910      HS-grad             9            Widowed
+32560  22      Private 201490      HS-grad             9      Never-married
+32561  52 Self-emp-inc 287927      HS-grad             9 Married-civ-spouse
+             occupation  relationship  race    sex capital_gain capital_loss
+32556   Protective-serv Not-in-family White   Male            0            0
+32557      Tech-support          Wife White Female            0            0
+32558 Machine-op-inspct       Husband White   Male            0            0
+32559      Adm-clerical     Unmarried White Female            0            0
+32560      Adm-clerical     Own-child White   Male            0            0
+32561   Exec-managerial          Wife White Female        15024            0
+      hours_per_week native_country income
+32556             40  United-States  <=50K
+32557             38  United-States  <=50K
+32558             40  United-States   >50K
+32559             40  United-States  <=50K
+32560             20  United-States  <=50K
+32561             40  United-States   >50K
+
+dim(adult_raw):
+[1] 32561    15
+
+names(adult_raw):
+ [1] "age"            "workclass"      "fnlwgt"         "education"     
+ [5] "education_num"  "marital_status" "occupation"     "relationship"  
+ [9] "race"           "sex"            "capital_gain"   "capital_loss"  
+[13] "hours_per_week" "native_country" "income"        
+
+str(adult_raw):
+'data.frame':	32561 obs. of  15 variables:
+ $ age           : int  39 50 38 53 28 37 49 52 31 42 ...
+ $ workclass     : chr  "State-gov" "Self-emp-not-inc" "Private" "Private" ...
+ $ fnlwgt        : int  77516 83311 215646 234721 338409 284582 160187 209642 45781 159449 ...
+ $ education     : chr  "Bachelors" "Bachelors" "HS-grad" "11th" ...
+ $ education_num : int  13 13 9 7 13 14 5 9 14 13 ...
+ $ marital_status: chr  "Never-married" "Married-civ-spouse" "Divorced" "Married-civ-spouse" ...
+ $ occupation    : chr  "Adm-clerical" "Exec-managerial" "Handlers-cleaners" "Handlers-cleaners" ...
+ $ relationship  : chr  "Not-in-family" "Husband" "Not-in-family" "Husband" ...
+ $ race          : chr  "White" "White" "White" "Black" ...
+ $ sex           : chr  "Male" "Male" "Male" "Male" ...
+ $ capital_gain  : int  2174 0 0 0 0 0 0 0 14084 5178 ...
+ $ capital_loss  : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ hours_per_week: int  40 13 40 40 40 40 16 45 50 40 ...
+ $ native_country: chr  "United-States" "United-States" "United-States" "United-States" ...
+ $ income        : chr  "<=50K" "<=50K" "<=50K" "<=50K" ...
+
+summary(adult_raw):
+      age            workclass         fnlwgt            education    
+ Min.   :17.00   Length   :32561   Min.   :  12285   Length   :32561  
+ 1st Qu.:28.00   N.unique :    8   1st Qu.: 117827   N.unique :   16  
+ Median :37.00   N.blank  :    0   Median : 178356   N.blank  :    0  
+ Mean   :38.58   Min.nchar:    7   Mean   : 189778   Min.nchar:    3  
+ 3rd Qu.:48.00   Max.nchar:   16   3rd Qu.: 237051   Max.nchar:   12  
+ Max.   :90.00   NAs      : 1836   Max.   :1484705                    
+ education_num     marital_status      occupation       relationship  
+ Min.   : 1.00   Length   :32561   Length   :32561   Length   :32561  
+ 1st Qu.: 9.00   N.unique :    7   N.unique :   14   N.unique :    6  
+ Median :10.00   N.blank  :    0   N.blank  :    0   N.blank  :    0  
+ Mean   :10.08   Min.nchar:    7   Min.nchar:    5   Min.nchar:    4  
+ 3rd Qu.:12.00   Max.nchar:   21   Max.nchar:   17   Max.nchar:   14  
+ Max.   :16.00                     NAs      : 1843                    
+        race              sex         capital_gain    capital_loss   
+ Length   :32561   Length   :32561   Min.   :    0   Min.   :   0.0  
+ N.unique :    5   N.unique :    2   1st Qu.:    0   1st Qu.:   0.0  
+ N.blank  :    0   N.blank  :    0   Median :    0   Median :   0.0  
+ Min.nchar:    5   Min.nchar:    4   Mean   : 1078   Mean   :  87.3  
+ Max.nchar:   18   Max.nchar:    6   3rd Qu.:    0   3rd Qu.:   0.0  
+                                     Max.   :99999   Max.   :4356.0  
+ hours_per_week    native_country        income     
+ Min.   : 1.00   Length   :32561   Length   :32561  
+ 1st Qu.:40.00   N.unique :   41   N.unique :    2  
+ Median :40.00   N.blank  :    0   N.blank  :    0  
+ Mean   :40.44   Min.nchar:    4   Min.nchar:    4  
+ 3rd Qu.:45.00   Max.nchar:   26   Max.nchar:    5  
+ Max.   :99.00   NAs      :  583                    

@@ -1,0 +1,7 @@
+"Metric","Before","After"
+"Total Rows",32561,32537
+"Missing: workclass",1836,0
+"Missing: occupation",1843,0
+"Missing: native_country",583,0
+"Total Missing Values",4262,0
+"Duplicate Rows",24,0

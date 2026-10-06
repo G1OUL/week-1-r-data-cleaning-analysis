@@ -1,0 +1,16 @@
+"Column","DataType","MissingCount","MissingPct","UniqueValues","Min","Max"
+"age","integer",0,0,73,17,90
+"workclass","character",1836,5.64,9,NA,NA
+"fnlwgt","integer",0,0,21648,12285,1484705
+"education","character",0,0,16,NA,NA
+"education_num","integer",0,0,16,1,16
+"marital_status","character",0,0,7,NA,NA
+"occupation","character",1843,5.66,15,NA,NA
+"relationship","character",0,0,6,NA,NA
+"race","character",0,0,5,NA,NA
+"sex","character",0,0,2,NA,NA
+"capital_gain","integer",0,0,119,0,99999
+"capital_loss","integer",0,0,92,0,4356
+"hours_per_week","integer",0,0,94,1,99
+"native_country","character",583,1.79,42,NA,NA
+"income","character",0,0,2,NA,NA

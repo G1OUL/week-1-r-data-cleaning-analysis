@@ -1,0 +1,132 @@
+FINAL ANALYSIS REPORT
+=====================
+
+DESCRIPTIVE STATISTICS - NUMERICAL
+-----------------------------------
+                     Variable      Mean Median        SD   Min     Max     Q1
+age                       age     38.59     37     13.64    17      90     28
+fnlwgt                 fnlwgt 189780.85 178356 105556.47 12285 1484705 117827
+education_num   education_num     10.08     10      2.57     1      16      9
+capital_gain     capital_gain   1078.44      0   7387.96     0   99999      0
+capital_loss     capital_loss     87.37      0    403.10     0    4356      0
+hours_per_week hours_per_week     40.44     40     12.35     1      99     40
+                   Q3
+age                48
+fnlwgt         236993
+education_num      12
+capital_gain        0
+capital_loss        0
+hours_per_week     45
+
+
+DESCRIPTIVE STATISTICS - CATEGORICAL
+--------------------------------------
+
+workclass:
+   Variable         Category Count   Pct
+1 workclass      Federal-gov   960  2.95
+2 workclass        Local-gov  2093  6.43
+3 workclass     Never-worked     7  0.02
+4 workclass          Private 24509 75.33
+5 workclass     Self-emp-inc  1116  3.43
+6 workclass Self-emp-not-inc  2540  7.81
+7 workclass        State-gov  1298  3.99
+8 workclass      Without-pay    14  0.04
+
+education:
+    Variable     Category Count   Pct
+1  education    Preschool    50  0.15
+2  education      1st-4th   166  0.51
+3  education      5th-6th   332  1.02
+4  education      7th-8th   645  1.98
+5  education          9th   514  1.58
+6  education         10th   933  2.87
+7  education         11th  1175  3.61
+8  education         12th   433  1.33
+9  education      HS-grad 10494 32.25
+10 education Some-college  7282 22.38
+11 education    Assoc-voc  1382  4.25
+12 education   Assoc-acdm  1067  3.28
+13 education    Bachelors  5353 16.45
+14 education      Masters  1722  5.29
+15 education  Prof-school   576  1.77
+16 education    Doctorate   413  1.27
+
+marital_status:
+        Variable              Category Count   Pct
+1 marital_status              Divorced  4441 13.65
+2 marital_status     Married-AF-spouse    23  0.07
+3 marital_status    Married-civ-spouse 14970 46.01
+4 marital_status Married-spouse-absent   418  1.28
+5 marital_status         Never-married 10667 32.78
+6 marital_status             Separated  1025  3.15
+7 marital_status               Widowed   993  3.05
+
+occupation:
+     Variable          Category Count   Pct
+1  occupation      Adm-clerical  3768 11.58
+2  occupation      Armed-Forces     9  0.03
+3  occupation      Craft-repair  4094 12.58
+4  occupation   Exec-managerial  4065 12.49
+5  occupation   Farming-fishing   992  3.05
+6  occupation Handlers-cleaners  1369  4.21
+7  occupation Machine-op-inspct  2000  6.15
+8  occupation     Other-service  3291 10.11
+9  occupation   Priv-house-serv   147  0.45
+10 occupation    Prof-specialty  5979 18.38
+11 occupation   Protective-serv   649  1.99
+12 occupation             Sales  3650 11.22
+13 occupation      Tech-support   927  2.85
+14 occupation  Transport-moving  1597  4.91
+
+race:
+  Variable           Category Count   Pct
+1     race Amer-Indian-Eskimo   311  0.96
+2     race Asian-Pac-Islander  1038  3.19
+3     race              Black  3122  9.60
+4     race              Other   271  0.83
+5     race              White 27795 85.43
+
+sex:
+  Variable Category Count   Pct
+1      sex   Female 10762 33.08
+2      sex     Male 21775 66.92
+
+income:
+  Variable Category Count   Pct
+1   income    <=50K 24698 75.91
+2   income     >50K  7839 24.09
+
+
+CORRELATION MATRIX
+------------------
+                   age  fnlwgt education_num capital_gain capital_loss
+age             1.0000 -0.0764        0.0362       0.0777       0.0577
+fnlwgt         -0.0764  1.0000       -0.0434       0.0004      -0.0103
+education_num   0.0362 -0.0434        1.0000       0.1227       0.0799
+capital_gain    0.0777  0.0004        0.1227       1.0000      -0.0316
+capital_loss    0.0577 -0.0103        0.0799      -0.0316       1.0000
+hours_per_week  0.0685 -0.0189        0.1484       0.0784       0.0542
+               hours_per_week
+age                    0.0685
+fnlwgt                -0.0189
+education_num          0.1484
+capital_gain           0.0784
+capital_loss           0.0542
+hours_per_week         1.0000
+
+
+BEFORE vs AFTER CLEANING
+------------------------
+                           Metric Before_Cleaning After_Cleaning
+1                      Total Rows           32561          32537
+2                   Total Columns              15             15
+3            Total Missing Values            4262              0
+4              Missing: workclass            1836              0
+5             Missing: occupation            1843              0
+6         Missing: native_country             583              0
+7                  Duplicate Rows              24              0
+8             Numerical Variables               6              6
+9  Categorical Variables (factor)               8              9
+10     Normalized Variables Added               0              6
+11        Dummy Encoded Variables               0             36

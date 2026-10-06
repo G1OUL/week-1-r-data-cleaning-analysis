@@ -1,0 +1,12 @@
+"Metric","Before_Cleaning","After_Cleaning"
+"Total Rows",32561,32537
+"Total Columns",15,15
+"Total Missing Values",4262,0
+"Missing: workclass",1836,0
+"Missing: occupation",1843,0
+"Missing: native_country",583,0
+"Duplicate Rows",24,0
+"Numerical Variables",6,6
+"Categorical Variables (factor)",8,9
+"Normalized Variables Added",0,6
+"Dummy Encoded Variables",0,36
