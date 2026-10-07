@@ -1,0 +1,161 @@
+=======================================================================
+  WEEK 2 ANALYTICAL INSIGHTS — UCI Adult Income Dataset
+  Derived from actual dataset computations
+=======================================================================
+
+INSIGHT 1: Severe Income Class Imbalance
+-------------------------------------------------------------------
+  Total observations: 32,537
+  Income <=50K: 24,698 (75.91%)
+  Income >50K:  7,839 (24.09%)
+  Ratio <=50K:>50K = 3.15:1
+
+INSIGHT 2: Significant Age Demographic Differences by Income
+-------------------------------------------------------------------
+  income     n mean_age median_age   sd_age q1_age q3_age
+1  <=50K 24698 36.78739         34 14.01733     25     46
+2   >50K  7839 44.25092         44 10.52010     36     51
+
+  Age gap (median): >50K earners are 10 years older than <=50K earners on average
+  Age skewness: 0.5576 (right-skewed; young workers more prevalent)
+
+INSIGHT 3: Monotonic Education–Income Association
+-------------------------------------------------------------------
+      education education_num n_total n_high pct_gt50k
+1     Preschool             1      50      0  0.000000
+2       1st-4th             2     166      6  3.614458
+3       5th-6th             3     332     16  4.819277
+4       7th-8th             4     645     40  6.201550
+5           9th             5     514     27  5.252918
+6          10th             6     933     62  6.645230
+7          11th             7    1175     60  5.106383
+8          12th             8     433     33  7.621247
+9       HS-grad             9   10494   1674 15.951973
+10 Some-college            10    7282   1386 19.033233
+11    Assoc-voc            11    1382    361 26.121563
+12   Assoc-acdm            12    1067    265 24.835989
+13    Bachelors            13    5353   2221 41.490753
+14      Masters            14    1722    959 55.691057
+15  Prof-school            15     576    423 73.437500
+16    Doctorate            16     413    306 74.092010
+
+  Lowest: Preschool (0.00%); Highest: Doctorate (74.09%)
+  Bachelors: 41.49% high-income; Masters: 55.69%; Prof-school: 73.44%
+
+INSIGHT 4: Institutional Concentration at 40-Hour Workweek
+-------------------------------------------------------------------
+  mean_hours median_hours sd_hours iqr_hours exactly_40   pct_40 under_40
+1   40.44033           40 12.34689         5      15204 46.72834     7757
+  pct_under40 over_40 pct_over40
+1    23.84055    9576   29.43111
+
+  Hours by income - <=50K mean: 38.84 hrs; >50K mean: 45.47 hrs
+  IQR for <=50K: 5 hrs; IQR for >50K: 10 hrs
+
+INSIGHT 5: Extreme Concentration and Skewness in Capital Gains
+-------------------------------------------------------------------
+  Zero-gain individuals: 29,825 (91.66%)
+  Positive-gain individuals: 2,712 (8.34%)
+  Non-zero: Min=114, Median=7298, Mean=12939, Max=99999
+  Top-code ceiling (99999): 159 individuals
+  Skewness (overall): 11.9489 (extreme right skew)
+
+INSIGHT 6: Self-Employment Income Premium vs Private Sector
+-------------------------------------------------------------------
+         workclass total n_high pct_high
+1     Self-emp-inc  1116    622 55.73477
+2      Federal-gov   960    371 38.64583
+3        Local-gov  2093    617 29.47922
+4 Self-emp-not-inc  2540    724 28.50394
+5        State-gov  1298    353 27.19569
+6          Private 24509   5152 21.02085
+7     Never-worked     7      0  0.00000
+8      Without-pay    14      0  0.00000
+
+INSIGHT 7: Sharp Occupational Economic Stratification
+-------------------------------------------------------------------
+          occupation total n_high   pct_high
+1    Exec-managerial  4065   1968 48.4132841
+2     Prof-specialty  5979   2049 34.2699448
+3    Protective-serv   649    211 32.5115562
+4       Tech-support   927    283 30.5285868
+5              Sales  3650    983 26.9315068
+6       Craft-repair  4094    929 22.6917440
+7   Transport-moving  1597    320 20.0375704
+8       Adm-clerical  3768    507 13.4554140
+9  Machine-op-inspct  2000    249 12.4500000
+10   Farming-fishing   992    115 11.5927419
+11      Armed-Forces     9      1 11.1111111
+12 Handlers-cleaners  1369     86  6.2819576
+13     Other-service  3291    137  4.1628684
+14   Priv-house-serv   147      1  0.6802721
+
+  Highest: Exec-managerial (48.4%), Prof-specialty (34.3%)
+  Lowest: Private house service (0.7%), Other-service (4.2%)
+
+INSIGHT 8: Inverted U-Curve Age Cohort Income Pattern
+-------------------------------------------------------------------
+  age_cohort    n pct_high_income mean_hours
+1      17-25 6400         1.78125   33.89922
+2      26-35 8510        18.69565   42.54242
+3      36-45 8005        34.62836   43.41287
+4      46-55 5534        39.86267   43.18721
+5      56-65 2931        31.49096   39.82122
+6        66+ 1157        20.13829   29.02506
+
+INSIGHT 9: Weak-to-Moderate Pairwise Linear Correlations
+-------------------------------------------------------------------
+                   age  fnlwgt education_num capital_gain capital_loss
+age             1.0000 -0.0764        0.0362       0.0777       0.0577
+fnlwgt         -0.0764  1.0000       -0.0434       0.0004      -0.0103
+education_num   0.0362 -0.0434        1.0000       0.1227       0.0799
+capital_gain    0.0777  0.0004        0.1227       1.0000      -0.0316
+capital_loss    0.0577 -0.0103        0.0799      -0.0316       1.0000
+hours_per_week  0.0685 -0.0189        0.1484       0.0784       0.0542
+               hours_per_week
+age                    0.0685
+fnlwgt                -0.0189
+education_num          0.1484
+capital_gain           0.0784
+capital_loss           0.0542
+hours_per_week         1.0000
+
+  Strongest positive: education_num-hours_per_week (r = 0.1484)
+  Strongest negative: age-fnlwgt (r = -0.0764)
+  No strong multicollinearity (all |r| < 0.15)
+
+INSIGHT 10: Workforce Composition — Dominant Private Sector
+-------------------------------------------------------------------
+         workclass     n         pct
+1          Private 24509 75.32655131
+2 Self-emp-not-inc  2540  7.80649722
+3        Local-gov  2093  6.43267665
+4        State-gov  1298  3.98930448
+5     Self-emp-inc  1116  3.42994130
+6      Federal-gov   960  2.95048714
+7      Without-pay    14  0.04302794
+8     Never-worked     7  0.02151397
+
+  Private sector dominates: 75.3% of the workforce
+  Government combined (Fed+Local+State): 13.4%
+
+INSIGHT 11: Education Level Numeric Differences by Income
+-------------------------------------------------------------------
+  income mean_edu_num median_edu_num sd_edu_num
+1  <=50K     9.596081              9   2.434654
+2   >50K    11.612195             12   2.385181
+
+LINE CHART DESIGN DECISION
+-------------------------------------------------------------------
+A conventional time-series line chart was not produced because the UCI Adult
+dataset records a single cross-sectional survey snapshot (1994) and does not
+contain a temporal or naturally ordered continuous progression variable.
+Using a line chart without valid time-based or ordered continuous X-axis data
+would produce a misleading visual that implies change over time when none exists.
+Instead, Figure 13 presents an ordered age-cohort trend line using cross-sectional
+brackets, which is analytically justified as an ordered categorical axis and is
+clearly labelled as a cohort comparison rather than a time series.
+
+=======================================================================
+  ANALYSIS COMPLETE — All statistics derived from actual dataset
+=======================================================================
