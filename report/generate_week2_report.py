@@ -759,12 +759,14 @@ def build_report():
         ("13.", "Visualization 10 — Capital Gain", 3),
         ("14.", "Visualization 11 — Correlation Heatmap", 3),
         ("15.", "Visualization 12 — Creative: Occupation vs Income", 3),
-        ("16.", "Line Chart Design Decision", 3),
-        ("17.", "Evidence-Based Insights (11 Findings)", 3),
-        ("18.", "Non-Technical Communication Summary", 3),
-        ("19.", "Limitations", 3),
-        ("20.", "Conclusion", 3),
-        ("21.", "References", 3),
+        ("16.", "Figure 13 — Life-Cycle Age Cohort Trend & Line Chart Decision", 3),
+        ("17.", "Supplementary Visualization 14 — Lattice Trellis Plot (Age vs Hours by Income)", 3),
+        ("18.", "Supplementary Visualization 15 — Base R Graphics (Age Distribution Histogram)", 3),
+        ("19.", "Evidence-Based Insights (11 Findings)", 3),
+        ("20.", "Non-Technical Communication Summary", 3),
+        ("21.", "Limitations", 3),
+        ("22.", "Conclusion", 3),
+        ("23.", "References", 3),
         ("Appendix", "Complete Week 2 R Code", 3),
     ]
     for num, title, _ in toc_items:
@@ -876,13 +878,15 @@ def build_report():
 
     add_heading(doc, "Chart Type Selection Rationale", level=2)
     strategy_table_data = [
-        ("Bar Chart", "Nominal/Ordinal categorical frequency", "Income dist., Workclass/Income, Occupation/Income"),
-        ("Histogram", "Continuous variable distribution", "Age, Hours per week, Capital gain"),
-        ("Violin + Boxplot", "Continuous variable comparison across groups", "Age vs Income, Hours vs Income"),
-        ("Scatter Plot", "Bivariate relationship: two continuous variables", "Age vs Hours per Week"),
-        ("Proportional Stacked Bar", "Category composition comparison across groups", "Education×Income, Workclass×Income, Occupation×Income"),
-        ("Heatmap (Correlation)", "Symmetric matrix of pairwise statistics", "Correlation matrix"),
-        ("Ordered Cohort Line", "Trend across ordered categorical axis", "Age cohort income rate (Figure 13)"),
+        ("Bar Chart (ggplot2)", "Nominal/Ordinal categorical frequency", "Income dist., Workclass/Income, Occupation/Income"),
+        ("Histogram (ggplot2)", "Continuous variable distribution", "Age, Hours per week, Capital gain"),
+        ("Violin + Boxplot (ggplot2)", "Continuous variable comparison across groups", "Age vs Income, Hours vs Income"),
+        ("Scatter Plot (ggplot2)", "Bivariate relationship: two continuous variables", "Age vs Hours per Week"),
+        ("Proportional Stacked Bar (ggplot2)", "Category composition comparison across groups", "Education×Income, Workclass×Income, Occupation×Income"),
+        ("Heatmap (ggplot2 / reshape2)", "Symmetric matrix of pairwise statistics", "Correlation matrix"),
+        ("Ordered Cohort Line (ggplot2)", "Trend across ordered categorical axis", "Age cohort income rate (Figure 13)"),
+        ("Trellis Conditioning Plot (lattice)", "Multipanel conditional bivariate distributions", "Age vs Hours stratified by Income (Figure 14)"),
+        ("Histogram (Base R)", "Dependency-free continuous distribution audit", "Age distribution histogram (Figure 15)"),
     ]
     headers_s = ["Chart Type", "Best Suited For", "Used In"]
     t_s = doc.add_table(rows=len(strategy_table_data)+1, cols=3)
@@ -942,8 +946,8 @@ def build_report():
 
         doc.add_page_break()
 
-    # ─── LINE CHART DECISION ──────────────────────────────────────────────
-    add_heading(doc, "Line Chart Design Decision", level=1)
+    # ─── LINE CHART DECISION & FIGURE 13 ──────────────────────────────────
+    add_heading(doc, "Line Chart Design Decision & Figure 13", level=1)
     add_para(doc, text=(
         "The Week 2 assignment specification mentions line charts as one of the "
         "required visualization types. The following decision-making process was "
@@ -956,25 +960,189 @@ def build_report():
         "— no year, month, date, or time-series identifier is present in any of "
         "the 15 variables. Drawing a line chart along an arbitrary or fabricated "
         "time axis would produce a misleading visualization that implies temporal "
-        "change when no time dimension exists in the data."
+        "change when no time dimension exists in the data. This is an ordered "
+        "cross-sectional cohort comparison, not a longitudinal time-series chart."
     ), bg="FFF3CD")
     add_para(doc, text=(
         "However, an analytically justified ordered-category trend visualization "
         "was produced as Figure 13 (Supplementary: Age Cohort Income Trend). "
         "This uses synthetic cross-sectional age brackets (17–25, 26–35, 36–45, "
         "46–55, 56–65, 66+) as an ordered categorical X-axis, connected by a line "
-        "to show the trend across life-cycle stages. This is clearly labelled as "
-        "a COHORT COMPARISON across age brackets, not a longitudinal time series."
+        "to show the pattern across life-cycle stages. This is clearly labelled as "
+        "an ordered cross-sectional cohort comparison across age brackets, not a longitudinal time series."
     ))
     add_figure(doc, "week2_13_age_cohort_income_trend.png",
                "Figure 13. Life-Cycle Cohort Trend: High-Income Rate Across Age Brackets (Cross-Sectional, Not Longitudinal)")
+    add_heading(doc, "Interpretation & Cohort Dynamics", level=2)
     add_para(doc, text=(
-        "Figure 13 reveals an inverted U-curve: the proportion of high-income "
-        "earners rises from 10.4% in the youngest cohort (17–25) to peak at "
-        "40.0% in the 46–55 bracket, then declines to 21.9% in the 66+ cohort "
-        "as retirees return to part-time or reduced-income arrangements. This "
-        "pattern is consistent with career lifecycle theory, though the cross-sectional "
-        "design cannot separate age effects from cohort or period effects."
+        "Figure 13 illustrates an inverted U-curve across ordered age cohorts: "
+        "The proportion of individuals in the >50K income group rises from approximately "
+        "1.8% in the 17–25 age cohort (1.78%, N=6,400) to approximately 18.7% in the 26–35 cohort "
+        "(18.70%, N=8,510), and approximately 34.6% in the 36–45 cohort (34.63%, N=8,005), reaching "
+        "a peak of approximately 39.9% (39.86%, N=5,534) among individuals aged 46–55. "
+        "It then declines to approximately 31.5% (31.49%, N=2,931) in the 56–65 cohort, "
+        "and to approximately 20.1% (20.14%, N=1,157) in the 66+ cohort."
+    ))
+    add_para(doc, text=(
+        "Importantly, this cross-sectional pattern may reflect differences in employment "
+        "status, labor-force participation, cohort composition, educational differences across generations, "
+        "and other factors, but the dataset cannot establish the cause. It must not be interpreted as "
+        "longitudinal career earnings trajectories for specific individuals, because the data represents "
+        "a single-point-in-time cross-section."
+    ))
+    doc.add_page_break()
+
+    # ─── SUPPLEMENTARY VISUALIZATION 14: LATTICE ──────────────────────────
+    add_heading(doc, "Supplementary Visualization 14 — Lattice: Age vs Weekly Hours by Income Group", level=1)
+    
+    add_heading(doc, "Purpose", level=3)
+    add_para(doc, (
+        "To explore and compare the bivariate relationship between worker age and weekly "
+        "working hours conditionally stratified across income groups (<=50K and >50K) using the Trellis "
+        "multipanel graphics paradigm implemented in the lattice package."
+    ))
+
+    add_heading(doc, "Why This Chart Was Selected", level=3)
+    add_para(doc, (
+        "The assignment specifically calls for exploring multiple R visualization frameworks, "
+        "including lattice alongside ggplot2. The lattice package (Sarkar, 2008) is R's "
+        "canonical implementation of Trellis display methodology (Cleveland, 1993). While "
+        "ggplot2 excels at layered grammar, lattice provides an exceptionally clean, high-performance "
+        "formula-based syntax (hours_per_week ~ age | income) for conditioned multipanel plots. "
+        "Separating the income groups into distinct conditioned panels eliminates the visual "
+        "occlusion that occurs when 32,537 points are plotted together on a single set of axes, "
+        "allowing side-by-side comparison of fitted regression trajectories."
+    ))
+
+    add_heading(doc, "R Code", level=3)
+    add_code_block(doc, """library(lattice)
+
+png("plots/week2_14_lattice_age_hours_income.png", width = 2700, height = 1800, res = 300)
+lattice_theme <- list(
+  strip.background = list(col = "#1B365D"),
+  strip.text = list(col = "white", font = 2, cex = 1.05),
+  axis.line = list(col = "#6C757D"),
+  axis.text = list(cex = 0.9, col = "#212529")
+)
+
+p14_lattice <- xyplot(
+  hours_per_week ~ age | income,
+  data = adult,
+  par.settings = lattice_theme,
+  pch = 16, cex = 0.55, alpha = 0.22, col = "#4A90E2",
+  grid = TRUE, type = c("p", "r"), lwd = 2.5, col.line = "#D9534F",
+  xlab = list("Age (Years)", font = 2, cex = 1.05),
+  ylab = list("Hours Worked per Week", font = 2, cex = 1.05),
+  main = list("Figure 14. Weekly Hours vs Age Stratified by Income (Lattice Trellis)",
+              font = 2, cex = 1.15, col = "#1B365D"),
+  sub = list("Conditioned multi-panel display: Linear fit across <=50K (left) and >50K (right)",
+             font = 1, cex = 0.85, col = "#465C7A"),
+  layout = c(2, 1)
+)
+print(p14_lattice)
+dev.off()""")
+
+    add_heading(doc, "Output", level=3)
+    add_figure(doc, "week2_14_lattice_age_hours_income.png",
+               "Figure 14. Supplementary Lattice Plot: Weekly Hours vs Age Stratified by Income Category (lattice::xyplot)")
+
+    add_heading(doc, "Interpretation", level=3)
+    add_para(doc, (
+        "The conditioned Trellis panels provide an unobstructed visual comparison of work hours "
+        "profiles between the two income cohorts across the entire age spectrum. In the left panel "
+        "(<=50K, N = 24,698), the data is strongly anchored at the 40-hour baseline, but exhibits "
+        "heavy density in part-time hours (<35 hours) among younger workers under 25 and older "
+        "workers past 65. The linear regression fit remains relatively flat near 38.8 hours per week. "
+        "In contrast, the right panel (>50K, N = 7,839) demonstrates virtually no part-time employment; "
+        "data points are heavily concentrated at 40, 50, and 60 hours per week across all ages, and "
+        "the fitted regression line sits at approximately 45.5 hours per week across the entire "
+        "working lifespan from age 28 through age 65."
+    ))
+
+    add_heading(doc, "Key Insight", level=3)
+    add_callout(doc, (
+        "Conditioning on income using lattice::xyplot reveals that high-income earners maintain "
+        "a substantially higher average working volume (mean 45.5 vs 38.8 hours) consistently "
+        "across all working ages, with part-time work almost entirely absent from the >$50K cohort. "
+        "This multi-panel trellis structure provides clearer visual separation than single-panel "
+        "color-coded scatter plots."
+    ))
+    doc.add_page_break()
+
+    # ─── SUPPLEMENTARY VISUALIZATION 15: BASE R ────────────────────────────
+    add_heading(doc, "Supplementary Visualization 15 — Base R: Age Distribution", level=1)
+    
+    add_heading(doc, "Purpose", level=3)
+    add_para(doc, (
+        "To illustrate the age distribution of the surveyed workforce using Base R graphics "
+        "(graphics::hist), demonstrating native R plotting capabilities and providing an "
+        "independent verification of workforce demographic structure without external packages."
+    ))
+
+    add_heading(doc, "Why Base R Was Used", level=3)
+    add_para(doc, (
+        "While modern tidyverse workflows prioritize ggplot2, Base R graphics remain a core "
+        "competency for R programmers. Base graphics require zero external dependencies, "
+        "render with near-instantaneous execution speed, and offer direct low-level canvas "
+        "control through functions like hist(), abline(), and legend(). Including this "
+        "visualization satisfies the assignment expectation to demonstrate base R plotting, "
+        "showing that core demographic findings are reproducible across R's graphical ecosystems."
+    ))
+
+    add_heading(doc, "R Code", level=3)
+    add_code_block(doc, """png("plots/week2_15_base_age_histogram.png", width = 2700, height = 1800, res = 300)
+par(mar = c(5, 5, 4, 2) + 0.1, bg = "#FFFFFF", family = "sans")
+
+h <- hist(
+  adult$age,
+  breaks = seq(15, 95, by = 5),
+  col = "#4A90E2",
+  border = "#1B365D",
+  main = "Figure 15. Supplementary Base R Plot: Age Distribution Histogram",
+  xlab = "Age (Years)",
+  ylab = "Frequency (Count)",
+  cex.main = 1.25, col.main = "#1B365D",
+  cex.lab = 1.05, font.lab = 2,
+  las = 1, ylim = c(0, 6500)
+)
+
+grid(nx = NA, ny = NULL, col = "#E9ECEF", lty = 1, lwd = 1)
+plot(h, col = "#4A90E2", border = "#1B365D", add = TRUE)
+
+abline(v = median(adult$age), col = "#D9534F", lwd = 2.5, lty = 2)
+abline(v = mean(adult$age), col = "#F5A623", lwd = 2.5, lty = 1)
+
+legend(
+  "topright",
+  legend = c(
+    sprintf("Median: %d years", as.integer(median(adult$age))),
+    sprintf("Mean: %.1f years", mean(adult$age)),
+    sprintf("N = %s", format(nrow(adult), big.mark = ","))
+  ),
+  col = c("#D9534F", "#F5A623", "transparent"),
+  lty = c(2, 1, 0), lwd = c(2.5, 2.5, 0), bty = "n", cex = 0.95
+)
+dev.off()""")
+
+    add_heading(doc, "Output", level=3)
+    add_figure(doc, "week2_15_base_age_histogram.png",
+               "Figure 15. Supplementary Base R Plot: Age Distribution Histogram (graphics::hist)")
+
+    add_heading(doc, "Interpretation", level=3)
+    add_para(doc, (
+        "The Base R histogram confirms the unimodal, moderately right-skewed profile "
+        "of the adult workforce (skewness = +0.558). The peak 5-year bin spans ages 30 to 35, "
+        "containing over 4,500 individuals, while ages 20 to 45 form the dense core of the "
+        "labor market. The vertical dashed line at 37 years denotes the sample median, while "
+        "the solid line at 38.6 years marks the arithmetic mean, visually demonstrating the "
+        "rightward pull exerted by older workers extending out to age 90."
+    ))
+
+    add_heading(doc, "Key Insight", level=3)
+    add_callout(doc, (
+        "Generating the age distribution through Base R graphics corroborates the exact "
+        "demographic metrics derived via ggplot2 (median = 37, mean = 38.6), verifying "
+        "that analytical conclusions remain invariant to the choice of graphics engine."
     ))
     doc.add_page_break()
 
@@ -1120,21 +1288,22 @@ def build_report():
     add_para(doc, text=(
         "This Week 2 report has presented a comprehensive data visualization and "
         "insight communication analysis of the UCI Adult / Census Income Dataset. "
-        "Twelve primary visualizations (Figures 1–12) and one supplementary cohort "
-        "trend chart (Figure 13) were produced using ggplot2 in R, each selected on "
-        "the basis of the data type and analytical question it was designed to address."
+        "A total of 15 publication-grade visualizations were produced across R's three major "
+        "graphical ecosystems: twelve core ggplot2 visualizations (Figures 1–12), one ordered "
+        "cohort trend visualization (Figure 13), one multipanel conditioning plot in lattice "
+        "(Figure 14), and one native distribution plot in Base R (Figure 15)."
     ))
     add_para(doc, text=(
         "The analysis revealed several consistent patterns: income class imbalance "
-        "(75.9% <=50K), a monotonic education–income association (0% to 74% high "
+        "(75.91% <=50K), a monotonic education–income association (0% to 74.09% high "
         "income from Preschool to Doctorate), dramatic occupational stratification "
-        "(0.7% to 48.4% across occupations), an older age profile for high earners "
+        "(0.68% to 48.41% across occupations), an older age profile for high earners "
         "(median 44 vs 34 years), and strong institutional anchoring at the 40-hour "
-        "workweek (46.7% of the workforce). Capital gain is concentrated among a "
-        "small minority (8.3%) with extreme skewness requiring log-scale treatment."
+        "workweek (46.73% of the workforce). Capital gain is concentrated among a "
+        "small minority (8.34%) with extreme skewness requiring log-scale treatment."
     ))
     add_para(doc, text=(
-        "All insights are grounded in actual computed statistics from the dataset. "
+        "All insights are strictly grounded in actual computed statistics from the dataset. "
         "Causal language was avoided throughout, and limitations of the cross-sectional, "
         "30-year-old, weighted survey design were explicitly acknowledged. "
         "The Week 1 pipeline remains fully intact and reproducible alongside this "
@@ -1147,6 +1316,9 @@ def build_report():
     refs = [
         "Kohavi, R., & Becker, B. (1996). Adult Dataset. UCI Machine Learning Repository. https://doi.org/10.24432/C5XW20",
         "Wickham, H. (2016). ggplot2: Elegant Graphics for Data Analysis (2nd ed.). Springer. https://ggplot2.tidyverse.org",
+        "Sarkar, D. (2008). Lattice: Multivariate Data Visualization with R. Springer Science & Business Media. https://doi.org/10.1007/978-0-387-75969-2",
+        "Cleveland, W. S. (1993). Visualizing Data. Hobart Press.",
+        "R Core Team. (2024). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria. https://www.R-project.org/",
         "Wickham, H., François, R., Henry, L., & Müller, K. (2023). dplyr: A Grammar of Data Manipulation. R package version 1.1.x. https://dplyr.tidyverse.org",
         "Wickham, H., & Girlich, M. (2023). tidyr: Tidy Messy Data. R package version 1.3.x. https://tidyr.tidyverse.org",
         "Wei, T., & Simko, V. (2021). corrplot: Visualization of a Correlation Matrix. R package version 0.92. https://CRAN.R-project.org/package=corrplot",
@@ -1172,7 +1344,7 @@ def build_report():
         "to generate all visualizations and analyses in this report. The code is "
         "organized into two scripts to maintain separation of concerns:"
     ))
-    add_bullet(doc, "R/08_week2_visualizations.R — All 13 ggplot2 visualization figures")
+    add_bullet(doc, "R/08_week2_visualizations.R — All 15 visualization figures (ggplot2, lattice, and Base R)")
     add_bullet(doc, "R/09_week2_analysis.R — All analytical computations and insights")
     doc.add_paragraph()
 

@@ -11,6 +11,7 @@ suppressPackageStartupMessages({
   library(scales)
   library(corrplot)
   library(reshape2)
+  library(lattice)
 })
 
 cat("=============================================================\n")
@@ -509,14 +510,107 @@ p13 <- ggplot(adult_cohort, aes(x = age_cohort, y = pct_high_income, group = 1))
   scale_y_continuous(limits = c(0, 48), labels = function(x) paste0(x, "%")) +
   labs(
     title = "Figure 13. Life-Cycle Cohort Trend: High-Income Rate Across Age Brackets",
-    subtitle = "Analytical demonstration: Inverted U-curve peaking in the 46–55 cohort (40.0%), declining in retirement ages (66+)",
+    subtitle = "Cross-sectional cohort profile: Proportion >$50K rises from 1.8% (17–25) to peak of 39.9% (46–55), declining to 20.1% (66+)",
     x = "Cross-Sectional Age Cohort (Lifespan Bracket)",
     y = "Proportion Earning >$50,000 (%)",
-    caption = "NOTE: Represents synthetic cross-sectional age cohorts, NOT a longitudinal time-series."
+    caption = "Source: UCI Adult Dataset | N = 32,537 | Cross-sectional cohort comparison, NOT a longitudinal time-series."
   ) +
   theme_academic
 
 ggsave(file.path(plots_dir, "week2_13_age_cohort_income_trend.png"), p13, width = 8, height = 5.2, dpi = 300)
 
-cat("\nAll 13 Week 2 visualizations generated successfully and saved to plots/\n")
+# -----------------------------------------------------------------------------
+# SUPPLEMENTARY VISUALIZATION 14: Lattice Conditioning Plot (Age vs Hours by Income)
+# -----------------------------------------------------------------------------
+cat("14. Generating week2_14_lattice_age_hours_income.png using lattice::xyplot...\n")
+lattice_plot_path <- file.path(plots_dir, "week2_14_lattice_age_hours_income.png")
+
+png(filename = lattice_plot_path, width = 2700, height = 1800, res = 300)
+lattice_theme <- list(
+  strip.background = list(col = "#1B365D"),
+  strip.text = list(col = "white", font = 2, cex = 1.05),
+  axis.line = list(col = "#6C757D"),
+  axis.text = list(cex = 0.9, col = "#212529")
+)
+
+p14_lattice <- xyplot(
+  hours_per_week ~ age | income,
+  data = adult,
+  par.settings = lattice_theme,
+  pch = 16,
+  cex = 0.55,
+  alpha = 0.22,
+  col = "#4A90E2",
+  grid = TRUE,
+  type = c("p", "r"),
+  lwd = 2.5,
+  col.line = "#D9534F",
+  xlab = list("Age (Years)", font = 2, cex = 1.05, col = "#212529"),
+  ylab = list("Hours Worked per Week", font = 2, cex = 1.05, col = "#212529"),
+  main = list(
+    label = "Figure 14. Supplementary Lattice Plot: Weekly Hours vs Age Stratified by Income",
+    font = 2, cex = 1.15, col = "#1B365D"
+  ),
+  sub = list(
+    label = "Trellis multi-panel display: Linear fit (red line) across <=50K (left) and >50K (right) subsets",
+    font = 1, cex = 0.85, col = "#465C7A"
+  ),
+  layout = c(2, 1)
+)
+print(p14_lattice)
+dev.off()
+
+# -----------------------------------------------------------------------------
+# SUPPLEMENTARY VISUALIZATION 15: Base R Age Distribution Histogram
+# -----------------------------------------------------------------------------
+cat("15. Generating week2_15_base_age_histogram.png using base R graphics...\n")
+base_plot_path <- file.path(plots_dir, "week2_15_base_age_histogram.png")
+
+png(filename = base_plot_path, width = 2700, height = 1800, res = 300)
+par(mar = c(5, 5, 4, 2) + 0.1, bg = "#FFFFFF", family = "sans")
+
+h <- hist(
+  adult$age,
+  breaks = seq(15, 95, by = 5),
+  col = "#4A90E2",
+  border = "#1B365D",
+  main = "Figure 15. Supplementary Base R Plot: Age Distribution Histogram",
+  xlab = "Age (Years)",
+  ylab = "Frequency (Count)",
+  cex.main = 1.25,
+  col.main = "#1B365D",
+  cex.lab = 1.05,
+  font.lab = 2,
+  las = 1,
+  ylim = c(0, 6500)
+)
+
+grid(nx = NA, ny = NULL, col = "#E9ECEF", lty = 1, lwd = 1)
+plot(h, col = "#4A90E2", border = "#1B365D", add = TRUE)
+
+# Add median and mean vertical reference lines
+abline(v = median(adult$age), col = "#D9534F", lwd = 2.5, lty = 2)
+abline(v = mean(adult$age), col = "#F5A623", lwd = 2.5, lty = 1)
+
+legend(
+  "topright",
+  legend = c(
+    sprintf("Median: %d years", as.integer(median(adult$age))),
+    sprintf("Mean: %.1f years", mean(adult$age)),
+    sprintf("N = %s", format(nrow(adult), big.mark = ","))
+  ),
+  col = c("#D9534F", "#F5A623", "transparent"),
+  lty = c(2, 1, 0),
+  lwd = c(2.5, 2.5, 0),
+  bty = "n",
+  cex = 0.95
+)
+
+mtext(
+  "Base R graphics implementation demonstrating dependency-free distribution plotting (Skewness: 0.56)",
+  side = 3, line = 0.4, cex = 0.88, col = "#465C7A"
+)
+dev.off()
+
+cat("\nAll 15 Week 2 visualizations (13 ggplot2 + 1 lattice + 1 base R) generated successfully!\n")
 cat("=== Script 08 Complete ===\n")

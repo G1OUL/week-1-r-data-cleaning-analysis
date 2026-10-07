@@ -34,12 +34,12 @@ week-1-r-data-cleaning-analysis/
 │   ├── 05_transformation.R           # Min-Max normalization & fastDummies encoding
 │   ├── 06_eda.R                      # Week 1 EDA visualizations (13 figures)
 │   ├── 07_final_analysis.R           # Descriptive statistics, correlations & summary
-│   ├── 08_week2_visualizations.R     # Week 2: 13 publication-quality ggplot2 charts
+│   ├── 08_week2_visualizations.R     # Week 2: 15 visualization charts (ggplot2, lattice, Base R)
 │   └── 09_week2_analysis.R           # Week 2: Evidence-based insights & statistics
 ├── plots/
 │   ├── 04_*.png                      # Week 1 outlier boxplots
 │   ├── 06_*.png                      # Week 1 EDA charts (13 figures)
-│   └── week2_*.png                   # Week 2 visualizations (13 charts, 300 DPI)
+│   └── week2_*.png                   # Week 2 visualizations (15 charts, 300 DPI)
 ├── outputs/                          # CSV and RDS output files, text reports
 ├── report/
 │   ├── generate_report.py            # Week 1 DOCX builder
@@ -78,39 +78,42 @@ week-1-r-data-cleaning-analysis/
 ### Objective
 Week 2 extends the cleaned Week 1 dataset into a comprehensive visualization and insight communication project. All charts were produced using ggplot2 at 300 DPI with a consistent professional academic theme.
 
-### Visualizations Produced (13 Charts)
+### Visualizations Produced (15 Charts Across ggplot2, lattice, and Base R)
 
-| Figure | Title | Chart Type |
-|--------|-------|-----------|
-| 1 | Income Distribution | Bar Chart |
-| 2 | Age Distribution | Histogram |
-| 3 | Education Distribution | Horizontal Bar Chart |
-| 4 | Education vs Income | Proportional Stacked Bar |
-| 5 | Workclass vs Income | Proportional Stacked Bar |
-| 6 | Age vs Income | Violin + Boxplot |
-| 7 | Hours per Week Distribution | Histogram |
-| 8 | Hours per Week vs Income | Violin + Boxplot |
-| 9 | Age vs Hours per Week | Scatter Plot |
-| 10 | Capital Gain Distribution | Histogram (Log Scale) |
-| 11 | Correlation Heatmap | Heatmap |
-| 12 | Occupation vs Income (Creative) | Proportional Stacked Bar |
-| 13 | Age Cohort Income Trend (Supplementary) | Line Chart (ordered cohort) |
+| Figure | Title | Chart Type | Engine / Framework |
+|--------|-------|-----------|--------------------|
+| 1 | Income Distribution | Bar Chart | `ggplot2` |
+| 2 | Age Distribution | Histogram | `ggplot2` |
+| 3 | Education Distribution | Horizontal Bar Chart | `ggplot2` |
+| 4 | Education vs Income | Proportional Stacked Bar | `ggplot2` |
+| 5 | Workclass vs Income | Proportional Stacked Bar | `ggplot2` |
+| 6 | Age vs Income | Violin + Boxplot | `ggplot2` |
+| 7 | Hours per Week Distribution | Histogram | `ggplot2` |
+| 8 | Hours per Week vs Income | Violin + Boxplot | `ggplot2` |
+| 9 | Age vs Hours per Week | Scatter Plot with Loess Smooth | `ggplot2` |
+| 10 | Capital Gain Distribution | Histogram (Log10 Scale) | `ggplot2` |
+| 11 | Correlation Heatmap | Heatmap | `ggplot2` / `reshape2` |
+| 12 | Occupation vs Income (Creative) | Proportional Stacked Bar | `ggplot2` |
+| 13 | Age Cohort Income Trend (Supplementary) | Ordered Cohort Trend Line Chart | `ggplot2` |
+| 14 | Weekly Hours vs Age by Income (Supplementary) | Trellis Conditioning Scatter Plot | `lattice` |
+| 15 | Age Distribution (Supplementary) | Native Frequency Histogram | `Base R` |
 
 ### R Scripts
-- **R/08_week2_visualizations.R** — All ggplot2 visualizations (Figures 1–13).
+- **R/08_week2_visualizations.R** — Generates all 15 figures utilizing **ggplot2**, **lattice** (`xyplot`), and **Base R** graphics (`hist`, `abline`).
 - **R/09_week2_analysis.R** — All analytical computations (11 evidence-based insights, descriptive statistics, correlation analysis).
 
 ### Week 2 Report
 `report/Week2_Data_Visualization_Report.docx` — A professional academic DOCX report (~50+ pages) containing:
 - Title page and table of contents
 - Dataset overview and connection to Week 1
-- Visualization design strategy
-- All 12 visualizations with Purpose, Why This Chart, R Code, Output, Interpretation, and Key Insight sections
-- Line chart design decision (with explanation of why no time-series chart was produced)
+- Visualization design strategy and chart selection rationale
+- All 15 visualizations with Purpose, Why This Chart, R Code, Output, Interpretation, and Key Insight sections
+- Line chart design decision (explaining why no artificial time-series was created on cross-sectional data)
+- Supplementary sections for **lattice** (Figure 14) and **Base R** (Figure 15)
 - 11 evidence-based insights (Finding / Evidence / Interpretation / Caution format)
 - Non-technical communication summary
 - Limitations, Conclusion, References
-- Appendix with complete R code
+- Appendix with complete Week 2 R code
 
 ---
 
