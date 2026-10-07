@@ -5,7 +5,7 @@
 This repository contains a two-week academic data analytics project using the UCI Adult (Census Income) Dataset in R.
 
 - **Week 1:** Complete data cleaning, preprocessing, feature transformation, and exploratory data analysis (R scripts 01–07).
-- **Week 2:** Comprehensive data visualization and insight communication using ggplot2 (R scripts 08–09), with a professional DOCX report.
+- **Week 2:** Comprehensive data visualization and insight communication using **ggplot2, lattice, and Base R** (R scripts 08–09), with a professional DOCX report.
 
 All work is reproducible from the original `adult.data` file using `run_all.R`.
 
@@ -76,7 +76,7 @@ week-1-r-data-cleaning-analysis/
 ## Week 2: Data Visualization and Insight Communication
 
 ### Objective
-Week 2 extends the cleaned Week 1 dataset into a comprehensive visualization and insight communication project. All charts were produced using ggplot2 at 300 DPI with a consistent professional academic theme.
+Week 2 extends the cleaned Week 1 dataset into a comprehensive visualization and insight communication project using **ggplot2, lattice, and Base R**. The 15 charts combine multiple visualization styles while maintaining a consistent professional academic presentation.
 
 ### Visualizations Produced (15 Charts Across ggplot2, lattice, and Base R)
 
