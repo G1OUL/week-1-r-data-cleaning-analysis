@@ -1,11 +1,13 @@
-# Week 1 & Week 2: Data Cleaning, Analysis, and Visualization with R
+# Weeks 1–4: Comprehensive Data Cleaning, Analysis, Visualization, Statistical Modeling, and Synthesis with R
 ## UCI Adult/Census Income Dataset
 
 ### Project Overview
-This repository contains a two-week academic data analytics project using the UCI Adult (Census Income) Dataset in R.
+This repository contains an end-to-end, four-week academic data science project using the UCI Adult (Census Income) Dataset in R.
 
 - **Week 1:** Complete data cleaning, preprocessing, feature transformation, and exploratory data analysis (R scripts 01–07).
 - **Week 2:** Comprehensive data visualization and insight communication using **ggplot2, lattice, and Base R** (R scripts 08–09), with a professional DOCX report.
+- **Week 3:** Parametric & non-parametric hypothesis testing, binary classification modeling (Logistic Regression & Elastic Net), and diagnostics (R scripts 10–13), with a professional DOCX report.
+- **Week 4:** Comprehensive final integrated monograph (`report/Week4_Comprehensive_Data_Analysis_Final_Report.docx`) synthesizing Weeks 1–3 into one 16-section publication-quality document.
 
 All work is reproducible from the original `adult.data` file using `run_all.R`.
 
@@ -35,18 +37,30 @@ week-1-r-data-cleaning-analysis/
 │   ├── 06_eda.R                      # Week 1 EDA visualizations (13 figures)
 │   ├── 07_final_analysis.R           # Descriptive statistics, correlations & summary
 │   ├── 08_week2_visualizations.R     # Week 2: 15 visualization charts (ggplot2, lattice, Base R)
-│   └── 09_week2_analysis.R           # Week 2: Evidence-based insights & statistics
+│   ├── 09_week2_analysis.R           # Week 2: Evidence-based insights & statistics
+│   ├── 10_week3_statistical_analysis.R # Week 3: Hypothesis testing & correlation matrices
+│   ├── 11_week3_modeling.R           # Week 3: Logistic Regression & Elastic Net (5-fold CV)
+│   ├── 12_week3_evaluation.R         # Week 3: ROC/PR curves, calibration, influence diagnostics
+│   └── 13_week3_report_generation.R  # Week 3: Pipeline verification & report driver
 ├── plots/
 │   ├── 04_*.png                      # Week 1 outlier boxplots
 │   ├── 06_*.png                      # Week 1 EDA charts (13 figures)
-│   └── week2_*.png                   # Week 2 visualizations (15 charts, 300 DPI)
+│   ├── week2_*.png                   # Week 2 visualizations (15 charts, 300 DPI)
+│   └── week3/                        # Week 3 model & inference diagnostics (15+ charts)
 ├── outputs/                          # CSV and RDS output files, text reports
+│   ├── week3_statistics/             # Hypothesis test results, descriptive statistics
+│   └── week3_model/                  # Odds ratios, evaluation metrics, VIF, calibration
+├── evidence/week3/                   # Full reproducibility evidence outputs
 ├── report/
 │   ├── generate_report.py            # Week 1 DOCX builder
 │   ├── generate_week2_report.py      # Week 2 DOCX builder
+│   ├── generate_week3_report.py      # Week 3 DOCX builder
+│   ├── generate_week4_report.py      # Week 4 comprehensive DOCX builder
 │   ├── Week1_Adult_Analysis_Report.docx  # Week 1 academic report
-│   └── Week2_Data_Visualization_Report.docx  # Week 2 academic report
-├── run_all.R                         # Master execution script (Week 1 + Week 2)
+│   ├── Week2_Data_Visualization_Report.docx  # Week 2 academic report
+│   ├── Week3_Statistical_Analysis_Predictive_Modeling.docx  # Week 3 academic report
+│   └── Week4_Comprehensive_Data_Analysis_Final_Report.docx  # Week 4 comprehensive report
+├── run_all.R                         # Master execution script (Weeks 1–3)
 ├── .gitignore
 └── README.md
 ```
@@ -247,3 +261,47 @@ python report\generate_week3_report.py
 - Random seed `set.seed(2026)` ensures full reproducibility of train/test split, CV folds, and Elastic Net tuning
 - The `glm.fit: fitted probabilities numerically 0 or 1 occurred` warning is expected due to near-perfect separation in sparse categories (e.g., `workclassNever-worked` and `workclassWithout-pay`). Elastic Net regularization stabilizes these coefficients.
 - Report generation requires Python 3 with `python-docx >= 1.0` and `pandas`
+
+---
+
+## Week 4: Comprehensive Data Analysis Reporting and Presentation
+
+### Objective and Scope
+Week 4 completes the engagement by integrating all previous three weeks of work—data cleaning (Week 1), visualization (Week 2), and statistical modeling (Week 3)—into a single, professionally designed, 16-section academic and professional monograph:
+`report/Week4_Comprehensive_Data_Analysis_Final_Report.docx`.
+
+The report unifies data hygiene, exploratory graphical insight, parametric and non-parametric hypothesis testing, and regularized predictive modeling into an evidence-based narrative without relying on ungrounded claims or post-hoc data fabrication.
+
+### Final Deliverable Details
+- **File Path**: `report/Week4_Comprehensive_Data_Analysis_Final_Report.docx`
+- **File Size**: ~2.29 MB (2,295,908 bytes)
+- **Estimated Length**: ~28–32 formatted pages (8,481 words, 247 paragraphs)
+- **Embedded Figures**: 15 authentic high-resolution charts across data cleaning, EDA, lattice conditioning, inference diagnostics, and ROC/PR performance curves
+- **Embedded Tables**: 17 structured tables (metadata schema, before/after cleaning metrics, Tukey outlier bounds, hypothesis tests registry, odds ratios, GVIF multicollinearity, consolidated model comparison, confusion matrix breakdown, calibration deciles, cross-week integration matrix, and R package versions)
+- **Code Listings**: Annotated R code blocks highlighting real implementations from `01_import.R`, `03_cleaning.R`, `10_week3_statistical_analysis.R`, and `11_week3_modeling.R`
+
+### Structure of the 16-Section Integrated Report
+1. **Section 1 — Title Page**: Official title, subtitle, repository URL, local path, metadata block, and reproducibility declaration.
+2. **Section 2 — Executive Summary**: Synthesis of data cleaning achievements, visual discoveries, statistical test results, and predictive metrics.
+3. **Section 3 — Introduction and Objectives**: Theoretical context, human capital problem formulation, and the 8-stage data science lifecycle.
+4. **Section 4 — Dataset Description and Data Source**: Provenance (1994 U.S. Census CPS), 15-variable schema dictionary, missingness profile, and data types.
+5. **Section 5 — Week 1: Data Cleaning and Preliminary Analysis**: Mode imputation (4,262 cells), duplicate purging (24 rows), Tukey IQR outlier screening, and transformations.
+6. **Section 6 — Week 2: Data Visualization and Insight Communication**: Tufte graphical principles, class imbalance (3.15:1), age divergence (10-yr median gap), 40-hr spike, and lattice conditioning.
+7. **Section 7 — Week 3: Statistical Analysis and Hypothesis Testing**: Formal verification confirming exactly 8 tests across 5 research questions (all p < 0.0001 under Bonferroni & BH-FDR), effect sizes (Cramer's V, Cohen's d), and assumption audits.
+8. **Section 8 — Week 3: Predictive Modeling**: Stratified 80/20 train/test split (seed 2026), 5-fold CV, Baseline vs. Logistic Regression vs. Elastic Net, odds ratios (marriage OR = 7.16, education OR = 1.35), and GVIF (< 1.73).
+9. **Section 9 — Model Evaluation and Diagnostics**: Multi-metric evaluation (GLM Accuracy: 84.76%, ROC-AUC: 0.9047, PR-AUC: 0.7271), confusion matrix trade-offs, decile calibration, and Cook's distance influence diagnostics.
+10. **Section 10 — Integrated Findings Across Weeks 1–3**: Comprehensive stage-to-insight synthesis matrix mapping data hygiene to exploratory and predictive milestones.
+11. **Section 11 — Discussion and Practical Implications**: Human capital returns, labor market segmentation, non-causality of observational data, and Title VII algorithmic fairness constraints.
+12. **Section 12 — Challenges Encountered and Lessons Learned**: Verified project hurdles (non-standard '?' missing tokens, capital gain zero-inflation, class imbalance, p-value sample size sensitivity).
+13. **Section 13 — Recommendations and Future Work**: Cost-sensitive decision threshold optimization, non-linear ensemble models (XGBoost/SHAP), contemporary ACS benchmarking, and disparate impact audits.
+14. **Section 14 — Conclusion**: Final verdict on the power of an evidence-based, reproducible analytical workflow.
+15. **Section 15 — Reproducibility and Technical Appendix**: Directory tree, script inventory, software versions (R 4.6.1, tidyverse, car, glmnet, pROC), execution instructions, and statistical glossary.
+16. **Section 16 — References**: Complete academic bibliography (Becker, Mincer, Tufte, Benjamini-Hochberg, Friedman et al., Kohavi & Becker).
+
+### Regenerating the Week 4 Report
+To regenerate the Week 4 final report from the command line:
+```powershell
+python report\generate_week4_report.py
+```
+*(Requires Python 3 with `python-docx >= 1.0` and `pandas`)*
+
