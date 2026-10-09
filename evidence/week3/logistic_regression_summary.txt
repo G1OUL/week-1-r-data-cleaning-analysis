@@ -1,0 +1,74 @@
+=========================================================================
+  MODEL 1: BASELINE LOGISTIC REGRESSION SUMMARY
+  Target: income (>50K = 1, <=50K = 0)
+  Training Sample: N = 26,030 observations
+=========================================================================
+
+
+Call:
+glm(formula = formula_baseline, family = binomial(link = "logit"), 
+    data = train_data)
+
+Coefficients:
+                                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         -9.284e+00  4.605e-01 -20.159  < 2e-16 ***
+age                                  2.338e-02  1.771e-03  13.200  < 2e-16 ***
+workclassLocal-gov                  -6.129e-01  1.252e-01  -4.897 9.71e-07 ***
+workclassNever-worked               -1.109e+01  1.793e+02  -0.062 0.950685    
+workclassPrivate                    -5.987e-01  1.041e-01  -5.749 8.97e-09 ***
+workclassSelf-emp-inc               -4.012e-01  1.369e-01  -2.931 0.003374 ** 
+workclassSelf-emp-not-inc           -1.012e+00  1.216e-01  -8.321  < 2e-16 ***
+workclassState-gov                  -7.506e-01  1.387e-01  -5.413 6.21e-08 ***
+workclassWithout-pay                -1.184e+01  1.340e+02  -0.088 0.929541    
+education_num                        2.993e-01  9.985e-03  29.980  < 2e-16 ***
+marital_statusMarried-AF-spouse      2.292e+00  6.563e-01   3.492 0.000479 ***
+marital_statusMarried-civ-spouse     1.969e+00  3.124e-01   6.303 2.92e-10 ***
+marital_statusMarried-spouse-absent -1.318e-01  2.566e-01  -0.514 0.607586    
+marital_statusNever-married         -4.357e-01  9.706e-02  -4.489 7.16e-06 ***
+marital_statusSeparated             -9.037e-02  1.836e-01  -0.492 0.622649    
+marital_statusWidowed               -1.110e-01  1.798e-01  -0.617 0.537010    
+occupationArmed-Forces              -1.040e+00  1.579e+00  -0.659 0.510017    
+occupationCraft-repair               6.478e-02  8.852e-02   0.732 0.464313    
+occupationExec-managerial            7.397e-01  8.507e-02   8.695  < 2e-16 ***
+occupationFarming-fishing           -1.018e+00  1.554e-01  -6.550 5.75e-11 ***
+occupationHandlers-cleaners         -5.528e-01  1.557e-01  -3.551 0.000383 ***
+occupationMachine-op-inspct         -2.384e-01  1.115e-01  -2.139 0.032455 *  
+occupationOther-service             -8.030e-01  1.302e-01  -6.168 6.91e-10 ***
+occupationPriv-house-serv           -3.388e+00  1.793e+00  -1.890 0.058819 .  
+occupationProf-specialty             2.679e-01  8.368e-02   3.202 0.001365 ** 
+occupationProtective-serv            3.487e-01  1.415e-01   2.464 0.013759 *  
+occupationSales                      2.878e-01  9.136e-02   3.150 0.001633 ** 
+occupationTech-support               5.802e-01  1.232e-01   4.711 2.47e-06 ***
+occupationTransport-moving          -8.448e-02  1.097e-01  -0.770 0.441421    
+relationshipNot-in-family            3.482e-01  3.087e-01   1.128 0.259380    
+relationshipOther-relative          -6.707e-01  2.933e-01  -2.287 0.022215 *  
+relationshipOwn-child               -1.057e+00  3.089e-01  -3.423 0.000619 ***
+relationshipUnmarried                1.517e-01  3.262e-01   0.465 0.641906    
+relationshipWife                     1.272e+00  1.138e-01  11.176  < 2e-16 ***
+raceAsian-Pac-Islander               6.905e-01  2.719e-01   2.540 0.011087 *  
+raceBlack                            5.588e-01  2.551e-01   2.190 0.028493 *  
+raceOther                            1.142e-01  3.887e-01   0.294 0.768961    
+raceWhite                            7.423e-01  2.436e-01   3.047 0.002311 ** 
+sexMale                              8.643e-01  8.848e-02   9.769  < 2e-16 ***
+capital_gain                         3.072e-04  1.107e-05  27.743  < 2e-16 ***
+capital_loss                         6.224e-04  4.156e-05  14.977  < 2e-16 ***
+hours_per_week                       3.174e-02  1.786e-03  17.773  < 2e-16 ***
+native_regionUnited-States           1.961e-01  8.566e-02   2.289 0.022076 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 28743  on 26028  degrees of freedom
+Residual deviance: 16656  on 25986  degrees of freedom
+AIC: 16742
+
+Number of Fisher Scoring iterations: 12
+
+
+=========================================================================
+Null Deviance:     28743.42 on 26028 degrees of freedom
+Residual Deviance: 16656.26 on 25986 degrees of freedom
+AIC:               16742.26
+5-Fold CV Mean AUC: 0.9047
+=========================================================================

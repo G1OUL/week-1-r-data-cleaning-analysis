@@ -159,3 +159,91 @@ python report\generate_report.py
 
 ### Limitations
 The dataset reflects 1994 U.S. Census Bureau data. Results should not be generalized to contemporary conditions. All observed relationships are associational (not causal). Missing values were resolved via mode imputation. See the Week 2 report for a complete limitations discussion.
+
+---
+
+## Week 3: Statistical Analysis and Predictive Modeling
+
+### Objectives
+- Conduct formal parametric and non-parametric hypothesis testing across demographic and human capital dimensions
+- Develop a reproducible binary classification pipeline predicting annual income >$50K
+- Evaluate models using held-out test set performance and diagnostic integrity checks
+- Compile a publication-quality academic Word report (~25 pages, 18 embedded figures, 16 tables)
+
+### New Scripts and Outputs
+
+| Script | Description |
+|--------|-------------|
+| `R/10_week3_statistical_analysis.R` | Descriptive statistics, normality diagnostics, Pearson/Spearman correlation matrices, 9 hypothesis tests with Bonferroni & BH-FDR corrections |
+| `R/11_week3_modeling.R` | Stratified 80/20 train/test split, 5-fold cross-validation, standard logistic regression, Elastic Net (glmnet) |
+| `R/12_week3_evaluation.R` | Confusion matrix, ROC-AUC, PR-AUC, calibration curve, Cook's distance residuals, odds ratios forest plot, 10+ visualizations |
+| `R/13_week3_report_generation.R` | Verifies prerequisites and invokes Python DOCX compiler |
+| `report/generate_week3_report.py` | Produces `Week3_Statistical_Analysis_Predictive_Modeling.docx` (2.05 MB, 18 figures) |
+
+**New output directories:**
+- `outputs/week3_statistics/` — Descriptive stats, correlation matrices, hypothesis test CSV and TXT
+- `outputs/week3_model/` — Logistic coefficients, odds ratios, VIF, calibration, confusion matrices, predictions
+- `plots/week3/` — 18 high-resolution PNG figures (300 DPI)
+- `evidence/week3/` — Reproducibility evidence (CSV outputs, text reports, R package versions)
+
+### Required R Packages (Week 3)
+
+```r
+install.packages(c("dplyr", "ggplot2", "tidyr", "scales", "corrplot",
+                   "reshape2", "moments", "car", "glmnet", "pROC"))
+```
+
+Python (for report generation): `pip install python-docx pandas`
+
+### Running Week 3
+
+#### Full Pipeline (Weeks 1 + 2 + 3)
+```powershell
+Rscript run_all.R
+```
+
+#### Week 3 Scripts Only (assumes Week 1 cleaned dataset exists)
+```powershell
+Rscript R/10_week3_statistical_analysis.R
+Rscript R/11_week3_modeling.R
+Rscript R/12_week3_evaluation.R
+Rscript R/13_week3_report_generation.R
+```
+
+#### Regenerate Week 3 DOCX Report Directly
+```powershell
+python report\generate_week3_report.py
+```
+
+### Week 3 Key Findings
+
+**Hypothesis Tests (all N = 32,537, α = 0.05, Bonferroni & BH-FDR corrected):**
+- **Age vs Income:** Welch t = 50.24, p < 0.0001, Cohen's d = 0.563 — High earners average 44.25 yrs vs 36.79 yrs
+- **Weekly Hours vs Income:** Welch t = 45.10, p < 0.0001, Cohen's d = 0.552 — High earners work 45.5 vs 38.8 hrs/week
+- **Education vs Income:** Chi-square = 4,428.4, df = 15, p < 0.0001, Cramer's V = 0.369 (moderate effect)
+- **Occupation vs Income:** Chi-square = 3,197.6, df = 13, p < 0.0001, Cramer's V = 0.314
+- **Workclass vs Income:** Chi-square = 922.4, df = 7, p < 0.0001, Cramer's V = 0.168
+
+**Predictive Modeling (Test Set N = 6,508):**
+
+| Model | Accuracy | ROC-AUC | F1-Score | Recall |
+|-------|----------|---------|----------|--------|
+| Baseline (Majority Class) | 75.91% | 0.500 | 0.000 | 0.0% |
+| Logistic Regression (GLM) | **84.76%** | **0.905** | **0.655** | 60.1% |
+| Elastic Net (alpha=0.5) | 84.10% | 0.900 | 0.625 | 55.0% |
+
+**Cross-Validation (Training N = 26,029):** 5-fold CV Mean AUC = 0.9047 ± 0.0053, Mean Accuracy = 85.10% ± 0.29%
+
+**Diagnostics:** All predictors GVIF^(1/(2·Df)) < 1.73 (no collinearity). Max Cook's D = 0.0330. Calibration error < 3% across all probability deciles.
+
+### Week 3 Report
+`report/Week3_Statistical_Analysis_Predictive_Modeling.docx` (2.05 MB)
+- 18 embedded publication-quality figures (300 DPI)
+- 16 formatted academic tables including odds ratios, VIF, calibration, and multi-metric evaluation
+- Complete hypothesis test battery with effect sizes, assumption checks, and plain-English conclusions
+- Odds ratio forest plot with 95% Wald confidence intervals for key predictors
+
+### Environment Limitations
+- Random seed `set.seed(2026)` ensures full reproducibility of train/test split, CV folds, and Elastic Net tuning
+- The `glm.fit: fitted probabilities numerically 0 or 1 occurred` warning is expected due to near-perfect separation in sparse categories (e.g., `workclassNever-worked` and `workclassWithout-pay`). Elastic Net regularization stabilizes these coefficients.
+- Report generation requires Python 3 with `python-docx >= 1.0` and `pandas`

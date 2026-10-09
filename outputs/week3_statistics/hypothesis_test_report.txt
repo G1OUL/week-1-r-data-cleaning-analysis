@@ -1,0 +1,126 @@
+=========================================================================
+  WEEK 3 FORMAL STATISTICAL HYPOTHESIS TESTING REPORT
+  Dataset: UCI Adult Census Income Dataset (N = 32,537)
+  Significance Level: alpha = 0.05 | Multiple Testing: Bonferroni & BH FDR
+=========================================================================
+
+[RQ1] Is educational attainment associated with income category?
+  Null Hypothesis:        H0: Education and income are independent.
+  Alternative Hypothesis: H1: Education and income are statistically associated.
+  Method:                 Pearson's Chi-Square Test of Independence (Sample N = 32,537)
+  Descriptive Stats:      16 Education categories; N = 32,537 (<=50K: 24,698, >50K: 7,839)
+  Test Statistic:         Chi-Square = 4428.4 (df = 15)
+  Unadjusted P-Value:     < 0.0001 (Raw: 0.000000e+00)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Cramer's V = 0.3689
+  Assumption Diagnostic:  Min expected count = 12.0; 0% cells < 5. Cochran rule satisfied.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   Statistically significant association between education and income (chi2 = 4428.4, df = 15, p < 0.0001, V = 0.369; moderate effect size).
+
+[RQ2a] Is average age significantly different between income groups?
+  Null Hypothesis:        H0: Mean age <=50K equals mean age >50K.
+  Alternative Hypothesis: H1: Mean age differs significantly between income groups.
+  Method:                 Welch Two-Sample t-test (unequal variances) (Sample N = 32,537)
+  Descriptive Stats:      <=50K: Mean = 36.79 (SD = 14.02) vs >50K: Mean = 44.25 (SD = 10.52)
+  Test Statistic:         t-statistic = 50.24 (df = 17406.1)
+  Unadjusted P-Value:     < 0.0001 (Raw: 0.000000e+00)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Cohen's d = 0.5629
+  Assumption Diagnostic:  Mild right-skewness (+0.56); robust by Central Limit Theorem (N = 32,537). Welch correction protects against heteroscedasticity.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   High earners are significantly older on average (mean 44.25 vs 36.79 yrs; t = 50.24, p < 0.0001, Cohen's d = 0.56; moderate-to-large effect).
+
+[RQ2b] Does the age distribution median differ between income groups (non-parametric)?
+  Null Hypothesis:        H0: Median age and distribution of age are identical across income groups.
+  Alternative Hypothesis: H1: Age distribution is shifted towards older individuals in the >50K group.
+  Method:                 Wilcoxon Rank-Sum Test (Mann-Whitney U) (Sample N = 32,537)
+  Descriptive Stats:      <=50K: Median = 34 (IQR = 21) vs >50K: Median = 44 (IQR = 15)
+  Test Statistic:         W-statistic = 132460134 (df = NA)
+  Unadjusted P-Value:     < 0.0001 (Raw: 0.000000e+00)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Rank-Biserial r = 0.3683
+  Assumption Diagnostic:  Distributional shape similar between groups; ordinal ranking assumption met. Exact = FALSE due to tied ages.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   Median age of high earners is significantly greater (median 44 vs 34 yrs; W = 132460134, p < 0.0001; non-parametric effect r = 0.3683).
+
+[RQ3a] Is weekly working time significantly different between income groups?
+  Null Hypothesis:        H0: Mean weekly hours <=50K equals mean weekly hours >50K.
+  Alternative Hypothesis: H1: Mean weekly hours differs between income groups.
+  Method:                 Welch Two-Sample t-test (unequal variances) (Sample N = 32,537)
+  Descriptive Stats:      <=50K: Mean = 38.84 (SD = 12.32) vs >50K: Mean = 45.47 (SD = 11.01)
+  Test Statistic:         t-statistic = 45.1 (df = 14568.1)
+  Unadjusted P-Value:     < 0.0001 (Raw: 0.000000e+00)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Cohen's d = 0.5518
+  Assumption Diagnostic:  Leptokurtic distribution (peaked at 40 hrs); CLT guarantees normal sampling distribution given large N.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   High earners work significantly more hours per week on average (mean 45.47 vs 38.84 hrs; t = 45.10, p < 0.0001, Cohen's d = 0.55; moderate effect).
+
+[RQ3b] Does the distribution of weekly working hours differ between income groups (non-parametric)?
+  Null Hypothesis:        H0: Median and rank distribution of weekly hours are identical across income groups.
+  Alternative Hypothesis: H1: Weekly hours rank distribution is shifted higher in the >50K group.
+  Method:                 Wilcoxon Rank-Sum Test (Mann-Whitney U) (Sample N = 32,537)
+  Descriptive Stats:      <=50K: Median = 40 (IQR = 5) vs >50K: Median = 40 (IQR = 10)
+  Test Statistic:         W-statistic = 130106291.5 (df = NA)
+  Unadjusted P-Value:     < 0.0001 (Raw: 0.000000e+00)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Rank-Biserial r = 0.344
+  Assumption Diagnostic:  Continuous/discrete hours; heavy spike at 40 hours produces tied ranks handled via normal approximation.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   Weekly working hours of high earners rank significantly higher (W = 130106292, p < 0.0001; non-parametric effect r = 0.3440).
+
+[RQ4a] Is workclass sector associated with income category?
+  Null Hypothesis:        H0: Workclass and income are independent.
+  Alternative Hypothesis: H1: Workclass and income are statistically associated.
+  Method:                 Pearson's Chi-Square Test of Independence (Sample N = 32,537)
+  Descriptive Stats:      8 Workclass levels (Private = 24,509, Self-emp-inc = 1,116, etc.)
+  Test Statistic:         Chi-Square = 922.35 (df = 7)
+  Unadjusted P-Value:     < 0.0001 (Raw: 7.156801e-195)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Cramer's V = 0.1684
+  Assumption Diagnostic:  Min expected count = 1.69 (Without-pay/Never-worked < 5 in 12.5% of cells). Chi-square robust due to huge sample N = 32,537.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   Significant association between employment sector and income (chi2 = 922.3, df = 7, p < 0.0001, V = 0.168; modest effect size).
+
+[RQ4b] Is occupation category associated with income category?
+  Null Hypothesis:        H0: Occupation and income are independent.
+  Alternative Hypothesis: H1: Occupation and income are statistically associated.
+  Method:                 Pearson's Chi-Square Test of Independence (Sample N = 32,537)
+  Descriptive Stats:      14 Occupation levels (Exec-managerial = 4,065, Prof-specialty = 5,979, etc.)
+  Test Statistic:         Chi-Square = 3197.61 (df = 13)
+  Unadjusted P-Value:     < 0.0001 (Raw: 0.000000e+00)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Cramer's V = 0.3135
+  Assumption Diagnostic:  Min expected count = 2.17 (Armed-Forces expected count = 2.17). Over 95% of cells exceed expected count of 5; test remains asymptotically valid.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   Substantial association between occupation and income (chi2 = 3197.6, df = 13, p < 0.0001, V = 0.313; strong categorical effect size).
+
+[RQ5] Do education years and weekly hours show a significant linear relationship?
+  Null Hypothesis:        H0: True correlation between education_num and hours_per_week equals 0.
+  Alternative Hypothesis: H1: True correlation is significantly different from 0.
+  Method:                 Pearson's Product-Moment Correlation Test (Sample N = 32,537)
+  Descriptive Stats:      Edu Num Mean = 10.1 (SD = 2.6); Hours Mean = 40.4 (SD = 12.3)
+  Test Statistic:         t-statistic = 27.07 (df = 32535)
+  Unadjusted P-Value:     < 0.0001 (Raw: 1.260232e-159)
+  Bonferroni Adjusted p:  < 0.0001
+  Benjamini-Hochberg FDR: < 0.0001
+  Effect Size:            Pearson's r = 0.1484
+  Assumption Diagnostic:  Bivariate linearity inspected; discrete education scale mildly violates strict normality but CLT ensures accurate inference.
+  Statistical Decision:   Reject H0 at alpha = 0.05
+  Practical Conclusion:   Statistically significant but weak positive correlation (r = +0.1484, t = 27.07, p < 0.0001, 95% CI [0.1378, 0.1590]).
+
+=========================================================================
+  METHODOLOGICAL NOTES ON STATISTICAL VS. PRACTICAL SIGNIFICANCE
+  Because N = 32,537 is large, standard errors are exceptionally small, causing
+  all hypothesis tests to retain p < 0.0001 even after family-wise Bonferroni
+  penalties. Therefore, effect sizes (Cramer's V, Cohen's d, Pearson's r, and
+  rank-biserial r) are critical to distinguishing statistically detectable
+  relationships from practically meaningful economic and sociological disparities.
+=========================================================================

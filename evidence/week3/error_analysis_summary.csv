@@ -1,0 +1,5 @@
+"error_type","Count","Pct_of_Test","Mean_Age","Mean_Education_Num","Mean_Hours","Mean_Capital_Gain","Median_Predicted_Prob"
+"False Negative",625,9.6,43,10.3,42.8,293.4,0.294
+"False Positive",367,5.64,45.3,12.2,47.3,682.9,0.635
+"True Negative",4573,70.27,36,9.4,38,92.1,0.036
+"True Positive",943,14.49,45,12.6,47,6523.3,0.756

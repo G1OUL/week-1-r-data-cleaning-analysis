@@ -1,0 +1,13 @@
+"Model","Actual","Predicted","Classification","Count","Percentage"
+"Baseline","<=50K (Neg)","<=50K (Neg)","True Negative (TN)",4940,75.91
+"Baseline","<=50K (Neg)",">50K (Pos)","False Positive (FP)",0,0
+"Baseline",">50K (Pos)","<=50K (Neg)","False Negative (FN)",1568,24.09
+"Baseline",">50K (Pos)",">50K (Pos)","True Positive (TP)",0,0
+"Logistic Regression","<=50K (Neg)","<=50K (Neg)","True Negative (TN)",4573,70.27
+"Logistic Regression","<=50K (Neg)",">50K (Pos)","False Positive (FP)",367,5.64
+"Logistic Regression",">50K (Pos)","<=50K (Neg)","False Negative (FN)",625,9.6
+"Logistic Regression",">50K (Pos)",">50K (Pos)","True Positive (TP)",943,14.49
+"Elastic Net","<=50K (Neg)","<=50K (Neg)","True Negative (TN)",4610,70.84
+"Elastic Net","<=50K (Neg)",">50K (Pos)","False Positive (FP)",330,5.07
+"Elastic Net",">50K (Pos)","<=50K (Neg)","False Negative (FN)",705,10.83
+"Elastic Net",">50K (Pos)",">50K (Pos)","True Positive (TP)",863,13.26

@@ -1,0 +1,4 @@
+"Model","Threshold","TP","FP","TN","FN","Accuracy","Balanced_Accuracy","Precision","Recall_Sensitivity","Specificity","NPV","F1_Score","ROC_AUC","PR_AUC"
+"Baseline (Majority Class)",0.5,0,0,4940,1568,0.7591,0.5,0,0,1,0.7591,0,0.5,0.2409
+"Logistic Regression (Standard GLM)",0.5,943,367,4573,625,0.8476,0.7636,0.7198,0.6014,0.9257,0.8798,0.6553,0.9047,0.7271
+"Regularized Logistic Regression (Elastic Net)",0.5,863,330,4610,705,0.841,0.7418,0.7234,0.5504,0.9332,0.8674,0.6251,0.9004,0.7214

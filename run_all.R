@@ -1,21 +1,21 @@
 # =============================================================================
 # run_all.R — Master script: runs all analysis scripts in order
-# Project: Week 1 & Week 2 - Data Cleaning, Preliminary Analysis, Visualization
+# Project: Weeks 1, 2 & 3 - Data Cleaning, Analysis, Visualization, Modeling
 # UCI Adult/Census Income Dataset
 # =============================================================================
 
 cat("=================================================================\n")
-cat("  MASTER RUN SCRIPT - Week 1 & Week 2 Adult Income Dataset\n")
+cat("  MASTER RUN SCRIPT - Weeks 1, 2 & 3: Adult Income Dataset\n")
 cat("  Starting full pipeline...\n")
 cat("=================================================================\n\n")
 
 # Set working directory to project root
 script_dir   <- tryCatch(dirname(sys.frame(1)), error = function(e) getwd())
 
-# Install required packages
+# Install required packages for Weeks 1-3
 required_packages <- c("dplyr", "ggplot2", "tidyr", "readr", "scales",
                        "corrplot", "reshape2", "fastDummies", "moments",
-                       "knitr", "stringr", "lattice")
+                       "knitr", "stringr", "lattice", "car", "glmnet", "pROC")
 for (pkg in required_packages) {
   if (!require(pkg, character.only = TRUE, quietly = TRUE)) {
     install.packages(pkg, repos = "https://cran.rstudio.com/", quiet = TRUE)
@@ -31,7 +31,13 @@ scripts_w1 <- c("R/01_import.R", "R/02_quality_assessment.R", "R/03_cleaning.R",
 # Week 2 scripts
 scripts_w2 <- c("R/08_week2_visualizations.R", "R/09_week2_analysis.R")
 
-scripts <- c(scripts_w1, scripts_w2)
+# Week 3 scripts
+scripts_w3 <- c("R/10_week3_statistical_analysis.R",
+                "R/11_week3_modeling.R",
+                "R/12_week3_evaluation.R",
+                "R/13_week3_report_generation.R")
+
+scripts <- c(scripts_w1, scripts_w2, scripts_w3)
 
 failed_scripts <- character()
 
@@ -55,7 +61,7 @@ for (s in scripts) {
 
 cat("\n=================================================================\n")
 if (length(failed_scripts) == 0) {
-  cat("  PIPELINE COMPLETE (Week 1 + Week 2) - ALL 9 SCRIPTS SUCCEEDED\n")
+  cat("  PIPELINE COMPLETE (Weeks 1 + 2 + 3) - ALL 13 SCRIPTS SUCCEEDED\n")
   cat("=================================================================\n")
 } else {
   cat("  PIPELINE FINISHED WITH ERRORS\n")
@@ -67,3 +73,8 @@ if (length(failed_scripts) == 0) {
   stop("Pipeline execution terminated with errors in one or more scripts.")
 }
 
+# Note: To run only Week 3 (when Weeks 1 & 2 outputs already exist):
+#   Rscript R/10_week3_statistical_analysis.R
+#   Rscript R/11_week3_modeling.R
+#   Rscript R/12_week3_evaluation.R
+#   Rscript R/13_week3_report_generation.R
